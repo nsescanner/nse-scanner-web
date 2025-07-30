@@ -2,8 +2,3 @@ Flask
 pandas
 numpy
 yfinance
-time
-os
-datetime
-threading
-MIMEText
