@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NSE F&O Web Scanner</title>
+  <script>
+    function fetchLogs() {
+      fetch('/logs')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("log").value = data.join('\n');
+        });
+    }
+    setInterval(fetchLogs, 3000);
+  </script>
+</head>
+<body>
+  <h2>📈 NSE F&O Stock Scanner</h2>
+
+  <form method="POST" action="/start">
+    <button type="submit">Start Scanner</button>
+  </form>
+
+  <form method="POST" action="/stop">
+    <button type="submit">Stop Scanner</button>
+  </form>
+
+  <form method="POST" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <button type="submit">Update Stock List</button>
+  </form>
+
+  <form method="POST" action="/save_email">
+    <label>Email for Alerts:</label>
+    <input type="email" name="email" value="{{ email }}" required />
+    <button type="submit">Save Email</button>
+  </form>
+
+  <h4>📋 Scanner Log:</h4>
+  <textarea id="log" rows="25" cols="100" readonly></textarea>
+</body>
+</html>
